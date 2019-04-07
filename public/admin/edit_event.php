@@ -5,47 +5,46 @@ require_once('src/event.inc.php');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $item = new Product();
+    $item = new Concert();
     $result = $item->selectOneProduct($id);
 }
 ?>
-<h4>Edit product</h4>
-<form action="" method="POST">
-    <input type="hidden" name="id" value="<?php echo ($result['productCode']); ?>">
-    <div class="form-group">
-        <label for="name">Event name</label>
-        <input type="text" class="form-control" name="concertName" placeholder="Concert name" value="<?php echo ($result['concert_name']); ?>">
-    </div>
-    <div class="form-group">
-        <label for="description"></label>
-        <textarea class="form-control" cols="100" rows="5" name="concert type"><?php echo ($result['concert_type']); ?></textarea>
-    </div>
-    <div class="form-group">
-        <label for="price">Price</label>
-        <input type="text" class="form-control" name="buyPrice" placeholder="Price" value="<?php echo ($result['']); ?>">
-    </div>
-    <div class="form-group">
-        <label for="product_img">Image</label>
-        <input type="file" class="form-control" name="product_img" value="<?php echo ($result['img']); ?>">
-    </div>
-    <input type="submit" class="btn btn-primary" name="submit">
-</form>
-
+<div class="container">
+    <h4>Edit product</h4>
+    <form action="" method="POST">
+        <div class="form-group">
+            <label for="concertName">Event name</label>
+            <input type="text" class="form-control" name="concertName" placeholder="Concert name" value="<?php echo ($result['concert_name']); ?>">
+        </div>
+        <div class="form-group">
+            <label for="price">Price each</label>
+            <input type="text" class="form-control" name="price" placeholder="Price each" value="<?php echo ($result['price_each']); ?>">
+        </div>
+        <div class="form-group">
+            <label for="startingDate">Starting date</label>
+            <input type="date" class="form-control" name="startingDate" value="<?php echo ($result['starting_date']); ?>">
+        </div>
+        <div class="form-group">
+            <label for="startingTime">Starting time</label>
+            <input type="time" class="form-control" name="startingTime" value="<?php echo ($result['starting_time']); ?>">
+        </div>
+        <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+        <a class="btn btn-danger" href="event.php">Back</a>
+    </form>
+</div>
 <?php
 
 if (isset($_POST['submit'])) {
     $fields = [
-        ':productName' => filter_input(INPUT_POST, 'productName', FILTER_SANITIZE_STRING),
-        ':productDescription' => filter_input(INPUT_POST, 'productDescription', FILTER_SANITIZE_STRING),
-        ':buyPrice' => filter_input(INPUT_POST, 'buyPrice', FILTER_SANITIZE_NUMBER_INT),
-        ':product_img' => filter_input(INPUT_POST, 'product_img', FILTER_SANITIZE_STRING),
+        ':concertName' => filter_input(INPUT_POST, 'concertName', FILTER_SANITIZE_STRING),
+        ':priceEach' => filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT),
+        ':startingDate' => filter_input(INPUT_POST, 'startingDate', FILTER_SANITIZE_STRING),
+        ':startingTime' => filter_input(INPUT_POST, 'startingTime', FILTER_SANITIZE_STRING),
     ];
-    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+    $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-    echo $id;
-
-    $editProduct = new Product();
-    $editProduct->edit($fields, $id);
+    $editConcert = new Concert();
+    $editConcert->edit($fields, $id);
 }
 
 ?>

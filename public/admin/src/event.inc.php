@@ -68,26 +68,20 @@ class Concert
         return $result;
     }
 
-    // public function edit($fields, $id)
-    // {
-    //     try {
-    //         $stmt = $this->db->prepare("UPDATE products SET productName = :productName, productDescription = :productDescription, buyPrice = :buyPrice, img = :product_img WHERE productCode = :productCode");
-    //         foreach ($fields as $key => $value) {
-    //             if ($key == ':buyPrice') {
-    //                 $stmt->bindValue($key, $value, PDO::PARAM_INT);
-    //             } else {
-    //                 $stmt->bindValue($key, $value, PDO::PARAM_STR);
-    //             }
-    //         }
-    //         $stmt->bindValue(':productCode', $id, PDO::PARAM_INT);
+    public function edit($fields, $id)
+    {
+        try {
+            $stmt = $this->db->prepare("UPDATE concert SET concert_name = :concertName, price_each = :priceEach, starting_date = :startingDate, starting_time = :startingTime WHERE c_id = :id");
+            foreach ($fields as $key => $value) {
+                $stmt->bindValue($key, $value, PDO::PARAM_STR);
+            }
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
-
-    //         if ($stmt) {
-    //             $stmt->execute();
-    //             header('Location: products.php');
-    //         }
-    //     } catch (PDOException $e) {
-    //         echo ($e->getMessage());
-    //     }
-    // }
+            if ($stmt) {
+                $stmt->execute();
+            }
+        } catch (PDOException $e) {
+            echo ($e->getMessage());
+        }
+    }
 }
