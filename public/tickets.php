@@ -18,35 +18,36 @@
     </div>
 
     <div class="column checkout-btn">
-        <a href="#">Continue to checkout</a>
+        <a href="checkout.php">Continue to checkout</a>
     </div>
 </div>
 
 <div class="arena">
     <form action="" method="post">
-        <div class="top">
+        <div class="top row-1">
 
+            <?php for ($i = 0; $i < 364; $i++) { ?>
             <div class="round">
-                <input type="checkbox" id="checkbox1" />
-                <label for="checkbox1"></label>
+                <input type="checkbox" id="top_checbox<?php echo($i) ?>" />
+                <label for="top_checbox<?php echo($i) ?>"></label>
             </div>
+            <?php } ?>
+        </div>
 
-            <div class="round">
-                <input type="checkbox" id="checkbox2" />
-                <label for="checkbox2"></label>
-            </div>
-
-            <div class="round">
-                <input type="checkbox" id="checkbox3" />
-                <label for="checkbox3"></label>
-            </div>
+        <div class="arena-stage">
+            <h1>(Arena Name)</h1>
         </div>
 
         <div class="round bottom">
-
+            <?php for ($i = 0; $i < 364; $i++) { ?>
+            <div class="round">
+                <input type="checkbox" id="bottom_checkbox<?php echo($i) ?>" />
+                <label for="bottom_checbox<?php echo($i) ?>"></label>
+            </div>
+            <?php } ?>
         </div>
     </form>
 
 </div>
 
-<?php include_once('../includes/footer.php'); ?> 
+<?php include_once('../includes/footer.php'); ?>

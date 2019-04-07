@@ -1,3 +1,5 @@
+/* GLOBAL */
+
 /* HEADER */
 .navbar-default {
   background-color: #dc7f22;
@@ -128,31 +130,44 @@
 
 /* BUY TICKET */
 .arena {
-  width: 800px;
-  height: 350px;
+  width: 90%;
+  height: 500px;
   position: relative;
   display: inline-block;
   border: 1px solid #000;
-  left: 20%;
-  right: 20%;
   margin-top: 50px;
+  left: 5%;
   margin-bottom: 100px;
 }
 
+.arena-stage{
+  width: 80%;
+  height: 250px;
+  border: 1px solid #000;
+  position: absolute;
+  top: 25%;
+  bottom: 15%;
+  left: 10%;
+  right: 10%;
+  border-radius: 100px;
+}
+
+.arena-stage h1{
+  text-align: center;
+  padding-top: 100px;
+}
+
 .round {
-  position: relative;
+  display:inline-block;
 }
 
 .round label {
-  width: 18px;
-  height: 18px;
+  width: 8px;
+  height: 8px;
   background-color: #ccc;
   border: 1px solid #ccc;
   border-radius: 50%;
   cursor: pointer;
-  left: 0;
-  position: absolute;
-  top: 0;
 }
 
 .round label:after {
@@ -161,16 +176,16 @@
   border: 2px solid #fff;
   border-top: none;
   border-right: none;
-  content: "";
   left: 2px;
   opacity: 0;
   position: absolute;
   top: 4px;
-  transform: rotate(-45deg);
 }
 
 .round input[type="checkbox"] {
   visibility: hidden;
+  float: left;
+  position: absolute;
 }
 
 .round input[type="checkbox"]:checked + label {
@@ -182,12 +197,6 @@
   opacity: 1;
 }
 
-.arena .top,
-.arena .bottom {
-  left: 18%;
-  right: 18%;
-}
-
 .arena .top {
   position: absolute;
   top: 3%;
@@ -195,7 +204,41 @@
 
 .arena .bottom {
   position: absolute;
-  bottom: 3%;
+  bottom: 1%;
+}
+
+.border-bottom{
+  border-bottom: 1px solid #000;
+  padding-bottom: 15px;
+}
+
+.rows{
+  position: relative;
+  display: block;
+}
+
+.rows span:first-child{
+  position: relative;
+  right: 40%;
+}
+
+.rows span:last-child{
+  position: relative;
+  left: 40%;
+}
+
+.content{
+  display: flex;
+  justify-content: space-around;
+}
+
+.contact-form{
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* FOOTER */

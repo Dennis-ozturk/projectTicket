@@ -85,4 +85,4 @@
     </div>
 </div>
 <!-- Current Concerts ENDS -->
-<?php include_once('../includes/footer.php'); ?> 
+<?php include_once('../includes/footer.php'); ?>

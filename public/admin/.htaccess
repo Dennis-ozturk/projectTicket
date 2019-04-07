@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# Rewrite for event.php to events
+RewriteRule ^events event.php [NC,L]
+
+# Rewrite for tickets.php to tickets
+RewriteRule ^tickets tickets.php [NC,L]
+
+# Rewrite for logout.php to logout
+RewriteRule ^logout logout.php [NC,L]
+
+# Rewrite for dashboard.php to dashboard
+RewriteRule ^dashboard dashboard.php [NC,L]
+
+# Rewrite for orders.php to orders
+RewriteRule ^orders orders.php [NC,L]

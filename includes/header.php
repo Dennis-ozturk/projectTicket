@@ -1,3 +1,7 @@
+<?php
+include('../db/config.php');
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -39,4 +43,4 @@
                 </ul>
             </div>
         </nav>
-    </header> 
+    </header>
