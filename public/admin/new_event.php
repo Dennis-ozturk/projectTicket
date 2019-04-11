@@ -59,12 +59,6 @@
                     ':timeStarting' => filter_input(INPUT_POST, 'timeStarting', FILTER_SANITIZE_STRING),
                 ];
                 $concert->createConcert($fields);
-                foreach($fields as $key => $value){
-                    echo $key;
-                    echo '<br>';
-                    echo $value;
-                    echo '<br>';
-                }
             }
 
             ?>

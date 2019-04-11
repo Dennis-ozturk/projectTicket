@@ -3,6 +3,7 @@ class Concert
 {
     private $db;
     protected $concertId;
+    protected $locationId;
     public function __construct()
     {
         $this->db = new Dbh();
@@ -31,7 +32,27 @@ class Concert
 
     public function createTickets()
     {
-        $stmt = $this->db->prepare("CALL insertTicket(:Id, :concertId)");
+        $stmt = $this->db->prepare("SELECT * FROM arena WHERE id = :arenaId");
+        $stmt->bindValue(':arenaId', $this->concertId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $capacity = $result['capacity'];
+        $tickets = array();
+
+        while (count($tickets) < $capacity) {
+            $tickets['TICKET-'. $result['name']. ':' . rand(1000, 9999) . '14'] = true;
+        }
+
+        $unique = array_keys($tickets);
+        
+        $this->insertTickets($unique, $this->concertId);
+    }
+
+    public function insertTickets($ticket, $id){
+        $split = ceil(count($ticket) / 3);
+        $chunk = array_chunk($ticket, $split);
+        print_r($chunk);
     }
 
     public function getConcerts()
