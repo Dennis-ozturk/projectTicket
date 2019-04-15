@@ -21,6 +21,10 @@ if (isset($_GET['id'])) {
             <input type="text" class="form-control" name="price" placeholder="Price each" value="<?php echo ($result['price_each']); ?>">
         </div>
         <div class="form-group">
+            <label for="message-text" class="col-form-label">Concert description</label>
+            <textarea type="text" rows="3" cols="50" name="concertDescription"><?php echo($result['concert_description']); ?></textarea>
+        </div>
+        <div class="form-group">
             <label for="startingDate">Starting date</label>
             <input type="date" class="form-control" name="startingDate" value="<?php echo ($result['starting_date']); ?>">
         </div>
@@ -38,6 +42,7 @@ if (isset($_POST['submit'])) {
     $fields = [
         ':concertName' => filter_input(INPUT_POST, 'concertName', FILTER_SANITIZE_STRING),
         ':priceEach' => filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT),
+        ':concertDescription' => filter_input(INPUT_POST, 'concertDescription', FILTER_SANITIZE_STRING),
         ':startingDate' => filter_input(INPUT_POST, 'startingDate', FILTER_SANITIZE_STRING),
         ':startingTime' => filter_input(INPUT_POST, 'startingTime', FILTER_SANITIZE_STRING),
     ];

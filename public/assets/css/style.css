@@ -1,8 +1,7 @@
 /* GLOBAL */
-
 /* HEADER */
 .navbar-default {
-  background-color: #dc7f22;
+  background-color: #338BFF;
   color: #fff;
 }
 
@@ -54,16 +53,13 @@
   color: #fff;
   left: 0;
   right: 0;
-  top: 30%;
+  top: 25%;
   bottom: 30%;
+  background-color: rgba(0,0,0,.9);
 }
 
-.card .text-content h6 {
-  font-size: 5vmin;
-}
-
-.card .text-content p {
-  font-size: 4vmin;
+.card .text-content  {
+  font-size: 3vmin;
 }
 
 /* SUBSCRIBE ROW */

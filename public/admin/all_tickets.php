@@ -1,13 +1,15 @@
 <?php include('includes/header.php'); ?>
 <?php include('src/ticket.inc.php'); ?>
+<pre>
 <?php
 $ticket = new Ticket();
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $rows = $ticket->selectAllTickets($id);
+    $arenaId = $_GET['arena'];
+    $rows = $ticket->selectAllTickets($id, $arenaId);
 }
 ?>
-
+</pre>
 <div class="dashboard">
     <table class="table">
         <thead>

@@ -12,7 +12,7 @@ class Concert
 
     public function createConcert($fields)
     {
-        $stmt = $this->db->prepare("CALL insertConcert(:concertName, :concertType, :concertLocation, :priceEach, :startDate, :timeStarting)");
+        $stmt = $this->db->prepare("CALL insertConcert(:concertName, :concertType, :concertLocation, :priceEach, :startDate, :timeStarting, :Img, :concertDescription)");
 
         foreach ($fields as $key => $value) {
             if ($key == ':price_each' || $key == ':concertLocation') {
@@ -101,7 +101,7 @@ class Concert
     public function edit($fields, $id)
     {
         try {
-            $stmt = $this->db->prepare("UPDATE concert SET concert_name = :concertName, price_each = :priceEach, starting_date = :startingDate, starting_time = :startingTime WHERE c_id = :id");
+            $stmt = $this->db->prepare("UPDATE concert SET concert_name = :concertName, price_each = :priceEach, concert_description = :concertDescription ,starting_date = :startingDate, starting_time = :startingTime WHERE c_id = :id");
             foreach ($fields as $key => $value) {
                 $stmt->bindValue($key, $value, PDO::PARAM_STR);
             }

@@ -11,7 +11,7 @@ class Ticket
 
     public function getConcerts()
     {
-        $stmt = $this->db->prepare("SELECT * FROM concert ");
+        $stmt = $this->db->prepare("SELECT * FROM concert c, arena a WHERE c.concert_location = a.id");
         if ($stmt->execute()) {
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -22,10 +22,11 @@ class Ticket
         }
     }
 
-    public function selectAllTickets($id)
+    public function selectAllTickets($id, $arenaId)
     {
-        $stmt = $this->db->prepare("SELECT * FROM concert c, concert_ticket ct WHERE c.c_id = :concertId AND ct.concert_id = :concertId");
+        $stmt = $this->db->prepare("SELECT * FROM concert c, concert_ticket ct, arena a WHERE c.c_id = :concertId AND ct.concert_id = :concertId AND a.id = :arenaId");
         $stmt->bindValue(':concertId', $id, PDO::PARAM_INT);
+        $stmt->bindValue(':arenaId', $arenaId, PDO::PARAM_INT);
         if ($stmt->execute()) {
             if ($stmt->rowCount() > 0) {
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

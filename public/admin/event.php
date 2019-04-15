@@ -45,7 +45,7 @@ if (isset($_GET['del'])) {
                             <a class="btn btn-sm btn-primary" href="edit_event.php?id=<?php echo ($row['c_id']); ?>">Edit</a>
                             <a class="btn btn-sm btn-danger" href="event.php?del=<?php echo ($row['c_id']); ?>">Delete</a>
                         </td>
-                    </tr>
+                    </tr> 
                     <?php
                     $i++;
                 }
