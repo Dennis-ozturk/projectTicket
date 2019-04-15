@@ -1,9 +1,9 @@
 <?php
+require_once('ticket.inc.php');
 class Concert
 {
     private $db;
-    protected $concertId;
-    protected $locationId;
+    protected $arenaId, $concertId, $locationId;
     public function __construct()
     {
         $this->db = new Dbh();
@@ -18,22 +18,37 @@ class Concert
             if ($key == ':price_each' || $key == ':concertLocation') {
                 $stmt->bindValue($key, $value, PDO::PARAM_INT);
                 if ($key === ':concertLocation') {
-                    $this->concertId = $value;
+                    $this->arenaId = $value;
                 }
             } else {
+                if ($key === ':concertName') {
+                    $this->concertName = $value;
+                    $stmt->bindValue($key, $value, PDO::PARAM_STR);
+                }
                 $stmt->bindValue($key, $value, PDO::PARAM_STR);
             }
         }
         if ($stmt->execute()) {
-            $this->createTickets();
+            $this->latestConcertId();
         }
         $stmt->closeCursor();
+    }
+
+    public function latestConcertId()
+    {
+        $stmt = $this->db->prepare("SELECT c_id FROM concert ORDER BY date_added DESC LIMIT 1");
+
+        if ($stmt->execute()) {
+            $fetchRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->concertId = $fetchRow['c_id'];
+            $this->createTickets();
+        }
     }
 
     public function createTickets()
     {
         $stmt = $this->db->prepare("SELECT * FROM arena WHERE id = :arenaId");
-        $stmt->bindValue(':arenaId', $this->concertId, PDO::PARAM_INT);
+        $stmt->bindValue(':arenaId', $this->arenaId, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -41,18 +56,23 @@ class Concert
         $tickets = array();
 
         while (count($tickets) < $capacity) {
-            $tickets['TICKET-'. $result['name']. ':' . rand(1000, 9999) . '14'] = true;
+            $tickets['TICKET-' . $result['name'] . ':' . rand(1000, 9999) . '14'] = true;
         }
 
-        $unique = array_keys($tickets);
-        
-        $this->insertTickets($unique, $this->concertId);
+        $uniqueTickets = array_keys($tickets);
+
+        $this->insertTickets($uniqueTickets, $this->concertId);
     }
 
-    public function insertTickets($ticket, $id){
-        $split = ceil(count($ticket) / 3);
-        $chunk = array_chunk($ticket, $split);
-        print_r($chunk);
+    public function insertTickets($ticket, $concertId)
+    {
+        $stmt = $this->db->prepare("INSERT INTO concert_ticket(concert_id, ticket_code) VALUES (:id, :ticket)");
+
+        foreach ($ticket as $key) {
+            $stmt->bindValue(":id", $concertId, PDO::PARAM_INT);
+            $stmt->bindValue(":ticket", $key, PDO::PARAM_STR);
+            $stmt->execute();
+        }
     }
 
     public function getConcerts()
@@ -66,17 +86,6 @@ class Concert
                 return $data;
             }
         }
-    }
-
-    public function delete($id)
-    {
-        $stmt = $this->db->prepare("CALL removeEvent(:concertId)");
-        $stmt->bindValue(":concertId", $id, PDO::PARAM_INT);
-        $result = $stmt->execute();
-        if ($result) {
-            header('Location: event.php');
-        }
-        $stmt->closeCursor();
     }
 
     public function selectOneProduct($id)
@@ -100,9 +109,23 @@ class Concert
 
             if ($stmt) {
                 $stmt->execute();
+                header("Location: event.php");
             }
         } catch (PDOException $e) {
             echo ($e->getMessage());
         }
+    }
+
+    public function delete($id)
+    {
+        $stmt = $this->db->prepare("CALL removeEvent(:concertId)");
+        $stmt->bindValue(":concertId", $id, PDO::PARAM_INT);
+        $result = $stmt->execute();
+        if ($result) {
+            $ticket = new Ticket();
+            $ticket->delete($id);
+            header('Location: event.php');
+        }
+        $stmt->closeCursor();
     }
 }
