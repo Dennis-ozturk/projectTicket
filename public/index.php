@@ -6,7 +6,6 @@ $slideshowIndex = 4;
 $i = 4;
 $concertIndex = 3;
 $rows = $concert->getConcerts();
-
 ?>
 <!-- Slideshow STARTS -->
 <?php include_once('src/slideshow.php'); ?>

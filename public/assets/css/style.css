@@ -116,12 +116,10 @@
   height: 60px;
   padding: 18px 20px;
   border-radius: 50px;
+  border: transparent;
+  color: #fff;
   margin: 20px;
   background-color: #42c11d;
-}
-
-.wrap-product-price .checkout-btn a {
-  color: #fff;
 }
 
 /* BUY TICKET */
@@ -140,12 +138,10 @@
   width: 80%;
   height: 250px;
   border: 1px solid #000;
-  position: absolute;
-  top: 25%;
-  bottom: 15%;
-  left: 10%;
-  right: 10%;
   border-radius: 100px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .arena-stage h1{
@@ -199,8 +195,9 @@
 }
 
 .arena .bottom {
-  position: absolute;
-  bottom: 1%;
+  display: inline-block;
+  bottom: 5%;
+  margin-top: 100px;
 }
 
 .border-bottom{
