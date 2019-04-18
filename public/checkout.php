@@ -3,6 +3,7 @@
   <!-- Cart information -->
   <table class="table table-bordered container">
     <tbody>
+      <!-- Tickets will display here what you have selected from event tickets -->
       <tr class="items" id="items">
       </tr>
     </tbody>
@@ -29,10 +30,10 @@
 
 <script src="assets/functions/displayTickets.js"></script>
 
-<?php  
-if(isset($_POST['data'])){
-  echo($_POST['data']);
-}
+<?php
+if (isset($_POST['data'])) {
+    echo ($_POST['data']);
+  }
 
 ?>
 <?php include_once('../includes/footer.php'); ?>

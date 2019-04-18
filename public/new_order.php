@@ -1,5 +1,9 @@
 <?php
-$values = $_POST['data'];
-foreach($values as $key => $value){
-    echo $key . " : " . $value;
+$data = $_POST['data'];
+$newArray = [];
+
+foreach ($data as $key => $value) {
+    $newArray[$key] = $value;
 }
+
+setcookie('cookie', serialize($newArray), time() + 3600);

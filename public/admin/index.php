@@ -13,6 +13,7 @@
 
 <body class="admin_page">
     <h1>Admin panel</h1>
+    <!-- Login form -->
     <form action="" method="POST" class="form">
 
         <span>Username</span>

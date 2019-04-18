@@ -2,7 +2,9 @@
 <?php require_once('admin/src/ticket.inc.php'); ?>
 <?php
 $ticket = new Ticket();
+//Get id from url and check if visitor is logged in
 if (isset($_GET['id']) && isset($_SESSION['user'])) {
+    //Regex that only allows a-z A-Z and 0-9 nothing else
     $id = preg_replace('/[^-a-zA-Z0-9_]/', '', $_GET['id']);
     $arenaId = $_GET['arena'];
     $tickets = $ticket->selectAllTickets($id, $arenaId);
@@ -36,18 +38,21 @@ if (isset($_GET['id']) && isset($_SESSION['user'])) {
                 $rows = $ticket->selectAllTickets($id, $arenaId);
                 $i = $tickets[0]['capacity'];
                 $half = $tickets[0]['capacity'] / 2;
+                // If there is no tickets do nothing
                 if (empty($rows)) { } else {
+                    //If there is tickets display them
                     foreach ($rows as $row) {
+                        //Making sure that it prints out half the tickets at top and half at bottom
                         if ($i > $half) { ?>
                             <div class="round">
-                                <input type="checkbox" class="ticket" id="top_checbox<?php echo ($i) ?>" name="tickets[]" value="<?php echo ($row['ticket_code'] . ' | seat:' . $i); ?>" />
+                                <input type="checkbox" class="ticket" id="top_checbox<?php echo ($i) ?>" name="tickets[]" value="<?php echo ($row['ticket_code']); ?>" />
                                 <label for="top_checbox<?php echo ($i) ?>"></label>
                             </div>
                             <?php
                             $i--;
                         } elseif ($i === $half) { ?>
                             <div class="round">
-                                <input type="checkbox" class="ticket" id="top_checbox<?php echo ($i) ?>" name="tickets[]" value="<?php echo ($row['ticket_code'] . ' | seat:' . $i); ?>" />
+                                <input type="checkbox" class="ticket" id="top_checbox<?php echo ($i) ?>" name="tickets[]" value="<?php echo ($row['ticket_code']); ?>" />
                                 <label for="top_checbox<?php echo ($i) ?>"></label>
                             </div>
 
@@ -58,7 +63,7 @@ if (isset($_GET['id']) && isset($_SESSION['user'])) {
                             $i--;
                         } elseif ($i < $half) { ?>
                             <div class="round">
-                                <input type="checkbox" class="ticket" id="bottom_checkbox<?php echo ($i) ?>" name="tickets[]" value="<?php echo ($row['ticket_code'] . ' | seat:' . $i); ?>" />
+                                <input type="checkbox" class="ticket" id="bottom_checkbox<?php echo ($i) ?>" name="tickets[]" value="<?php echo ($row['ticket_code']); ?>" />
                                 <label for="bottom_checkbox<?php echo ($i) ?>"></label>
                             </div>
                             <?php

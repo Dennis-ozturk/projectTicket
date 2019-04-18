@@ -9,7 +9,9 @@ if (empty($rows)) { } else { ?>
                 <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
-                <?php foreach ($rows as $row) {
+                <?php
+                // Slideshow that gets img from database ref
+                foreach ($rows as $row) {
                     if ($slideshowIndex == 0) {
                         break;
                     } elseif ($slideshowIndex == 4) { ?>

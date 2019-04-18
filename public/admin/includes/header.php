@@ -21,6 +21,7 @@
 <body>
     <!-- HEADER -->
     <?php if ($_SESSION['admin']) : ?>
+        <!-- Checks if session admin is set if not redirect admin to sign in which is index page -->
         <header>
             <nav>
                 <!-- MOBILE BTN:DROPDOWN -->

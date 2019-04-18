@@ -29,6 +29,7 @@ if (isset($_GET['del'])) {
             <?php
             $rows = $concert->getConcerts();
             $i = 1;
+            // If there is no events display nothing else loop all events and btns for edit and remove by passing c_id
             if (empty($rows)) { } else {
                 foreach ($rows as $row) { ?>
                     <tr>
@@ -45,7 +46,7 @@ if (isset($_GET['del'])) {
                             <a class="btn btn-sm btn-primary" href="edit_event.php?id=<?php echo ($row['c_id']); ?>">Edit</a>
                             <a class="btn btn-sm btn-danger" href="event.php?del=<?php echo ($row['c_id']); ?>">Delete</a>
                         </td>
-                    </tr> 
+                    </tr>
                     <?php
                     $i++;
                 }

@@ -23,16 +23,17 @@ session_start();
         <nav class="navbar navbar-expand-lg navbar-default">
             <a class="navbar-brand navbar-default-color" href="/">Tickets</a>
             <?php if (isset($_SESSION['user'])) { ?>
+                <!-- Checks if session user is not empty, if it is it will display another nav for the visitor -->
                 <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Buy Ticket</a>
+                            <a class="nav-link" href="../events.php">Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Events</a>
+                            <a class="nav-link" href="../user_tickets.php">You tickets</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../logout.php">Logout</a>

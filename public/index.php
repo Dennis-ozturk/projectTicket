@@ -7,18 +7,19 @@ $i = 4;
 $concertIndex = 3;
 $rows = $concert->getConcerts();
 ?>
-<!-- Slideshow STARTS -->
+<!-- Slideshow -->
 <?php include_once('src/slideshow.php'); ?>
 
 
 <div class="wrap">
     <?php
+    // If there is no events display nothing else loop all events
     if (empty($rows)) { } else {
         foreach ($rows as $row) {
             if ($i == 0) {
                 break;
             } else { ?>
-                <a href="tickets.php?id=<?php echo($row['c_id']); ?>&arena=<?php echo($row['id']); ?>">
+                <a href="tickets.php?id=<?php echo ($row['c_id']); ?>&arena=<?php echo ($row['id']); ?>">
                     <div class="card" style="width: 18rem;">
                         <img src="assets/img/events/<?php echo $row['img']; ?>" class="card-img-top" alt="concert img">
                         <div class="text-content">
@@ -46,11 +47,11 @@ $rows = $concert->getConcerts();
         </a>
     </div>
 </div>
-<!-- Subscribe END -->
 
-<!-- Current Concerts STARTS -->
+<!-- Current Concerts  -->
 <div class="wrap wrap-content">
     <?php
+    // Same thing as above but with different style and html
     if (empty($rows)) { } else {
         foreach ($rows as $row) {
             if ($concertIndex == 0) {
@@ -61,7 +62,7 @@ $rows = $concert->getConcerts();
                     <div class="card-body">
                         <h5 class="card-title"><?php echo ($row['concert_name']); ?></h5>
                         <p class="card-text"><?php echo ($row['concert_description']); ?></p>
-                        <a href="tickets.php?id=<?php echo($row['c_id']); ?>&arena=<?php echo($row['id']); ?>" class="btn btn-primary">Look for seats</a>
+                        <a href="tickets.php?id=<?php echo ($row['c_id']); ?>&arena=<?php echo ($row['id']); ?>" class="btn btn-primary">Look for seats</a>
                     </div>
                 </div>
                 <?php
@@ -71,5 +72,4 @@ $rows = $concert->getConcerts();
     }
     ?>
 </div>
-<!-- Current Concerts ENDS -->
 <?php include_once('../includes/footer.php'); ?>

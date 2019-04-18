@@ -1,6 +1,5 @@
 <?php include('includes/header.php'); ?>
 <?php include('src/ticket.inc.php'); ?>
-<pre>
 <?php
 $ticket = new Ticket();
 if (isset($_GET['id'])) {
@@ -9,7 +8,7 @@ if (isset($_GET['id'])) {
     $rows = $ticket->selectAllTickets($id, $arenaId);
 }
 ?>
-</pre>
+<!-- Selecting all the tickets when pressed on specific event -->
 <div class="dashboard">
     <table class="table">
         <thead>

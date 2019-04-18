@@ -9,6 +9,7 @@ if (isset($_GET['id'])) {
     $result = $item->selectOneProduct($id);
 }
 ?>
+<!-- Form for editing the selected event -->
 <div class="container">
     <h4>Edit product</h4>
     <form action="" method="POST">

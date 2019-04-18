@@ -19,6 +19,7 @@ $ticket = new Ticket();
             <?php
             $rows = $ticket->getConcerts();
             $i = 1;
+                // If there is no tickets for event display nothing else loop all tickets for event
             if (empty($rows)) { } else {
                 foreach ($rows as $row) { ?>
                     <tr>
@@ -27,7 +28,7 @@ $ticket = new Ticket();
                         <td><?php echo ($row['starting_date']); ?></td>
                         <td><?php echo ($row['starting_time']); ?></td>
                         <td>
-                            <a class="btn btn-sm btn-primary" href="all_tickets.php?id=<?php echo ($row['c_id']); ?>&arena=<?php echo($row['id']); ?>">All tickets</a>
+                            <a class="btn btn-sm btn-primary" href="all_tickets.php?id=<?php echo ($row['c_id']); ?>&arena=<?php echo ($row['id']); ?>">All tickets</a>
                         </td>
                     </tr>
                     <?php
